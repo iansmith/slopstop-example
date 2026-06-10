@@ -120,16 +120,22 @@ needs fixing.
 The problem is described in [PROBLEM.md](PROBLEM.md) and broken into four parts
 in [PROBLEM-1.md](PROBLEM-1.md) through [PROBLEM-4.md](PROBLEM-4.md).
 
-Claude can create all four GitHub issues for you automatically. In your Claude
-Code session run:
+Run `/slopstop:create-gh` once for each part. The skill creates a GitHub issue
+and assigns it the canonical `EXAMPLE-N` ticket key that the rest of the slopstop
+workflow uses. In your Claude Code session:
 
 ```
-/slopstop:start
+/slopstop:create-gh --title "Part 1 — Date/time parser" --body "See PROBLEM-1.md"
+/slopstop:create-gh --title "Part 2 — Event storage and CRUD" --body "See PROBLEM-2.md"
+/slopstop:create-gh --title "Part 3 — Day view" --body "See PROBLEM-3.md"
+/slopstop:create-gh --title "Part 4 — Week view" --body "See PROBLEM-4.md"
 ```
 
-Then tell Claude: **"Create GitHub issues for each part of PROBLEM.md"** and it
-will read the problem files and open the issues in your fork. Once the issues
-exist you can see them at `https://github.com/<your-username>/slopstop-example/issues`.
+Or tell Claude: **"Create one GitHub issue for each part in PROBLEM-1.md through
+PROBLEM-4.md using /slopstop:create-gh"** and it will run the skill four times,
+reading each problem file for the title and body.
+
+Once created, the issues are at `https://github.com/<your-username>/slopstop-example/issues`.
 
 ---
 
