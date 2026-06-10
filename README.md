@@ -1,10 +1,10 @@
 # slopstop-example
 
 A hands-on example project for learning the [slopstop](https://github.com/iansmith/slopstop)
-workflow. You will build a small but real command-line calendar program, broken
-into 4 parts. Each part is a GitHub issue in your fork. You will use slopstop to
-plan, implement, review, and merge each part — the same workflow used on production
-software.
+workflow. You will direct Claude Code to build a small but real command-line calendar
+program, broken into 4 parts. Each part is a GitHub issue in your fork. You will use
+slopstop to direct Claude Code through the full cycle — planning, implementation, review,
+and merge — the same workflow used on production software.
 
 ---
 
@@ -141,39 +141,39 @@ Once created, the issues are at `https://github.com/<your-username>/slopstop-exa
 
 ## Working through the problem
 
-Once your issues are created, use the slopstop lifecycle for each one:
+Once your issues are created, use the slopstop lifecycle for each one. Each
+command is something you type; Claude Code does the work:
 
-| Step | Command | What it does |
-|------|---------|--------------|
+| Step | Command | What Claude Code does |
+|------|---------|----------------------|
 | Start a ticket | `/slopstop:start` | Creates a branch, marks the issue in-progress |
 | Plan the work | `/slopstop:plan` | Writes red tests first, proposes an implementation plan |
-| Implement | *(your choice)* | Execute the plan — see note below |
+| Implement | *(see below)* | Writes the code, runs tests, iterates until green |
 | Open a PR | `/slopstop:pr` | Runs tests, complexity gate, CodeRabbit review |
 | Merge | `/slopstop:merge` | Squash-merges, closes the issue, cleans up |
 
 **On the implement step:** slopstop does not prescribe a single command here
-because different projects have different build and test setups. You have a few
-options:
+because different projects have different build and test setups. After
+`/slopstop:plan` completes, direct Claude Code to execute it:
 
-- Tell Claude directly: **"implement the plan"** — it will follow the plan
-  from `/slopstop:plan` and write the code.
-- If your project has a `/slopstop:run` or similar project-specific skill,
-  use that.
-- For this example, after running `/slopstop:plan`, just say **"implement it"**
-  and Claude will write the code, run the tests, and iterate until they pass.
+- Say **"implement the plan"** — Claude Code will follow the plan it just
+  produced, write all the code, run the tests, and iterate until they pass.
+- If your project has a project-specific skill for this, use that instead.
 
 Work the parts in order (Part 1 → Part 4): each part builds on the previous one.
 
 ### What to watch for
 
-- **Part 1 (date parser)** is where cyclomatic complexity will push back on you.
-  A naive `if/elif` chain over all the supported date formats will trigger the
-  slopstop CC gate. That is intentional — it is showing you exactly what the gate
-  is for. Decompose the parser into smaller functions and watch the score drop.
+- **Part 1 (date parser)** is where the slopstop complexity gate will fire.
+  A naive `if/elif` chain over all the supported date formats produces
+  cyclomatic complexity well above the threshold — Claude Code will be asked
+  to refactor before the PR can proceed. That is intentional: watch Claude
+  decompose the parser into smaller functions and see the score drop.
 
-- **Part 3 and 4 (views)** are where the design decisions from Part 1 and 2
-  pay off. If your parser returns a clean `datetime`, the display code is simple.
-  If it returns a tangle of strings, you will feel it here.
+- **Parts 3 and 4 (views)** are where the design decisions from Parts 1 and 2
+  pay off. If Claude Code produced a clean parser boundary in Part 1, the
+  display code writes itself. If the parser leaked complexity forward, you will
+  see it here.
 
 ---
 
