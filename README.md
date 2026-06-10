@@ -114,12 +114,18 @@ gh label create "in-progress" --color "0075ca" --description "Work in progress"
 Start a Claude Code session in the repo directory and run:
 
 ```
-/slopstop:gh-init
+/slopstop:gh-init --workflow 3
 ```
 
-This will verify your configuration, confirm the label setup, and write any
-missing scaffolding. Answer the prompts — it is safe to re-run if anything
-needs fixing.
+The `--workflow 3` flag tells slopstop to use the 3-state workflow (Todo →
+In Progress → Done) and skips the interactive workflow question. If you omit
+the flag, gh-init will ask "Which workflow? [3/4]" — answer `3`. Answering
+`4` will add an `in_review` label and an extra transition step that this
+example does not use.
+
+gh-init will verify your configuration, confirm the repo, create the
+`in-progress` label if it does not exist, and write `.project-conf.toml`.
+It is safe to re-run if anything needs fixing.
 
 ### 5. Create the problem tickets
 
