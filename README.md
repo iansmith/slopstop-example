@@ -151,6 +151,7 @@ command is something you type; Claude Code does the work:
 | Implement | *(see below)* | Writes the code, runs tests, iterates until green |
 | Open a PR | `/slopstop:pr` | Runs tests, complexity gate, CodeRabbit review |
 | Merge | `/slopstop:merge` | Squash-merges, closes the issue, cleans up |
+| Archive | `/slopstop:archive` | Moves the ticket's local tracking state from active to archive |
 
 **On the implement step:** slopstop does not prescribe a single command here
 because different projects have different build and test setups. After
