@@ -12,21 +12,53 @@ software.
 
 Before you start, make sure you have:
 
-- **Claude Code** — the Anthropic CLI. You need a Claude account that can run
-  Claude Code (claude.ai/code). Install it with:
+- **A Claude account** capable of running Claude Code (claude.ai/code or the
+  desktop app). A Pro or Team plan is required.
+
+- **Claude Code CLI** — the terminal interface to Claude Code:
   ```
   npm install -g @anthropic-ai/claude-code
   ```
-- **gh** — the GitHub CLI, on your PATH and authenticated.
+
+- **gh** — the GitHub CLI, on your PATH and authenticated:
   ```
-  brew install gh      # macOS
+  brew install gh      # macOS; see https://cli.github.com for other platforms
   gh auth login
   ```
-- **slopstop plugin** — install it into Claude Code:
-  ```
-  claude plugin marketplace add iansmith/slopstop
-  claude plugin install slopstop@slopstop
-  ```
+
+### Installing slopstop
+
+Pick the method that matches how you run Claude Code.
+
+**Claude Code CLI (terminal)** — two-step marketplace install:
+
+```
+claude plugin marketplace add iansmith/slopstop
+claude plugin install slopstop@slopstop
+```
+
+Commands appear as `/slopstop:start`, `/slopstop:plan`, etc.
+
+**Claude Desktop** — the desktop app does not yet support `/plugin install`, so
+use the shell installer instead:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/iansmith/slopstop/master/install-for-claude-desktop.sh | bash
+```
+
+This downloads each skill file into `~/.claude/commands/`. Commands appear as
+`/slopstop-start`, `/slopstop-plan`, etc. (hyphen instead of colon — same
+skills, different namespace).
+
+To pin to a specific release instead of `master`:
+
+```bash
+SLOPSTOP_REF=v2.1.0 bash <(curl -fsSL https://raw.githubusercontent.com/iansmith/slopstop/master/install-for-claude-desktop.sh)
+```
+
+> The rest of this guide uses the CLI (`/slopstop:verb`) form. If you are on
+> Desktop, substitute the hyphen form (`/slopstop-verb`) wherever you see a
+> slash command.
 
 ---
 
