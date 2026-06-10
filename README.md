@@ -50,10 +50,10 @@ This downloads each skill file into `~/.claude/commands/`. Commands appear as
 `/slopstop-start`, `/slopstop-plan`, etc. (hyphen instead of colon — same
 skills, different namespace).
 
-To pin to a specific release instead of `master`:
+To pin to the current release (recommended):
 
 ```bash
-SLOPSTOP_REF=v2.1.0 bash <(curl -fsSL https://raw.githubusercontent.com/iansmith/slopstop/master/install-for-claude-desktop.sh)
+SLOPSTOP_REF=v2.2.0 bash <(curl -fsSL https://raw.githubusercontent.com/iansmith/slopstop/master/install-for-claude-desktop.sh)
 ```
 
 > The rest of this guide uses the CLI (`/slopstop:verb`) form. If you are on
