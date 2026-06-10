@@ -147,8 +147,20 @@ Once your issues are created, use the slopstop lifecycle for each one:
 |------|---------|--------------|
 | Start a ticket | `/slopstop:start` | Creates a branch, marks the issue in-progress |
 | Plan the work | `/slopstop:plan` | Writes red tests first, proposes an implementation plan |
+| Implement | *(your choice)* | Execute the plan — see note below |
 | Open a PR | `/slopstop:pr` | Runs tests, complexity gate, CodeRabbit review |
 | Merge | `/slopstop:merge` | Squash-merges, closes the issue, cleans up |
+
+**On the implement step:** slopstop does not prescribe a single command here
+because different projects have different build and test setups. You have a few
+options:
+
+- Tell Claude directly: **"implement the plan"** — it will follow the plan
+  from `/slopstop:plan` and write the code.
+- If your project has a `/slopstop:run` or similar project-specific skill,
+  use that.
+- For this example, after running `/slopstop:plan`, just say **"implement it"**
+  and Claude will write the code, run the tests, and iterate until they pass.
 
 Work the parts in order (Part 1 → Part 4): each part builds on the previous one.
 
