@@ -95,9 +95,15 @@ repo  = "slopstop-example"
 in_progress = "in-progress"
 ```
 
-Replace `<your-username>` with your GitHub username. The `status_labels` section
-tells slopstop which labels to move issues through — create those labels in your
-fork if they don't exist:
+Replace `<your-username>` with your GitHub username.
+
+The `status_labels` section tells slopstop which labels to move issues through.
+This example uses the **3-state workflow** (Todo → In Progress → Done), which only
+requires an `in_progress` label. The 4-state workflow adds an `in_review` label
+between In Progress and Done — do not add that here, or slopstop will expect an
+extra review transition that this example does not use.
+
+Create the label in your fork if it doesn't exist:
 
 ```bash
 gh label create "in-progress" --color "0075ca" --description "Work in progress"
