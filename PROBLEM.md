@@ -63,14 +63,38 @@ Work through these in order. Each one is a separate GitHub issue in your repo.
 
 ## Language and dependencies
 
-Use any language you like. Python is suggested because the standard library has
-everything you need (`datetime`, `re`, `sqlite3`, `argparse`) and there is no
-setup friction.
+Three languages are well-supported for this problem. Pick the one you are most
+comfortable with and tell Claude your choice at the start of each session — it
+will use the right idioms, test framework, and tooling throughout.
 
-**Do not use a third-party date-parsing library** for Part 1. The entire point of
-that part is to write the parser yourself and watch how its structure affects the
-complexity score. You can add a library later if you want — but write it from
-scratch first.
+**Python**
+- Standard library covers everything: `datetime`, `re`, `sqlite3`, `argparse`
+- Tests with `pytest`
+- Entry point: a `cal.py` script or a `cal/` package with `__main__.py`
+- No virtual environment needed for the core problem; add one if you want `pytest`
+  isolated
+
+**Go**
+- Standard library: `time`, `regexp`, `database/sql` + `modernc.org/sqlite` (pure-Go
+  SQLite driver, no cgo) or `mattn/go-sqlite3` (cgo), `flag` or `cobra` for CLI
+- Tests with the built-in `testing` package; `go test ./...`
+- Entry point: `cmd/cal/main.go` dispatching to `internal/dateparse`,
+  `internal/store`, `internal/display` packages
+- The Go type system makes the `parse(expr string, now time.Time) (time.Time, error)`
+  signature very clean; the complexity trap in Part 1 is just as real
+
+**JavaScript / Node.js**
+- Standard library: `Date`, built-in regex; use `better-sqlite3` for synchronous
+  SQLite (much simpler than the async `sqlite3` package for a CLI tool)
+- Tests with `node:test` (Node 18+) or `jest`
+- Entry point: a `cal.js` or `bin/cal` script with a `#!/usr/bin/env node` shebang
+- `npm init -y` and `npm install better-sqlite3` is the only setup required
+
+**Regardless of language:** do not use a third-party date-parsing library for
+Part 1 (`moment`, `dateutil`, `chrono-node`, etc. are all off-limits). The entire
+point of that part is to write the parser yourself and watch how its structure
+affects the complexity score. You can add a library later if you want — but write
+it from scratch first.
 
 ## What you are learning
 
