@@ -1,0 +1,10 @@
+[project]
+name = "wordfreq"
+version = "0.1.0"
+description = "Example word-frequency CLI for the slopstop quickstart"
+requires-python = ">=3.11"
+
+# Presence of this section is what lets slopstop auto-detect `pytest` as the
+# test command for this project.
+[tool.pytest.ini_options]
+testpaths = ["."]

@@ -1,0 +1,20 @@
+# slopstop project configuration.
+#
+# This is the one file you edit by hand before starting the quickstart.
+# Change `key` from iansmith/slopstop-example to YOUR copy of this repo, e.g.
+#   key = "your-github-username/slopstop-example"
+# Everything else can stay as-is.
+
+system = "github"
+key    = "iansmith/slopstop-example"
+prefix = "WORD"
+
+# 3-state workflow: Todo -> In Progress -> Done.
+# slopstop marks work in-progress by adding this label to the issue.
+[status_labels]
+in_progress = "status:in-progress"
+
+# Use Claude's own code review on each PR (no CodeRabbit account needed).
+[pr_review]
+backend = "claude"
+effort  = "medium"
