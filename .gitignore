@@ -1,3 +1,15 @@
+# slopstop working state — gitignored ON PURPOSE.
+#
+# .slopstop/  per-ticket tracking notes (task_plan/findings/progress), created
+#             by :start and moved to .slopstop/ticket-archive/ at :merge.
+# scratch/    transient run artifacts from :design / :run (PRDs, charters, run
+#             state). Created on demand; never committed.
+#
+# Both hold machine state, not source. They stay out of the repo and the diff.
+# The durable counterpart, design/, IS committed — see HOW-IT-WORKS.md.
+.slopstop/
+scratch/
+
 # Python
 __pycache__/
 *.pyc

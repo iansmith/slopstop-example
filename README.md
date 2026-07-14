@@ -13,6 +13,9 @@ same behavior and the same bugs. Work in whichever you prefer.
 
 > **New here? Follow the guided walkthrough:**
 > **https://github.com/iansmith/slopstop/blob/master/QUICKSTART.md**
+>
+> **Want to understand how it works, not just run it?** Read
+> [HOW-IT-WORKS.md](HOW-IT-WORKS.md) — the building blocks, one primitive at a time.
 
 ---
 
@@ -42,9 +45,23 @@ rows). Fixing them is the quickstart.
 
 ```
 .project-conf.toml   slopstop config — edit `key` to point at your copy
+HOW-IT-WORKS.md      the building blocks explained, one primitive at a time
+TICKETS.md           the three bugs + one feature, as ticket descriptions
+design/              committed, durable design docs (start with design/wordfreq.md)
 data/sample.txt      the text the tool counts
 data/stopwords.txt   common words, for the --stopwords feature (WORD-4)
 python/              wordfreq.py + tests
 go/                  wordfreq.go + tests
-TICKETS.md           the three bugs + one feature, as ticket descriptions
 ```
+
+Two more directories appear while you work, and both are **gitignored** — they
+hold slopstop's short-term memory, not source:
+
+```
+.slopstop/           per-ticket tracking notes (task_plan / findings / progress)
+scratch/             transient run artifacts (only from the larger :design/:run mode)
+```
+
+The split between committed `design/` and gitignored `.slopstop/` + `scratch/` is
+the heart of the layout — see [HOW-IT-WORKS.md](HOW-IT-WORKS.md), "The three
+directories."

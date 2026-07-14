@@ -1,20 +1,38 @@
 # slopstop project configuration.
 #
-# This is the one file you edit by hand before starting the quickstart.
-# Change `key` from iansmith/slopstop-example to YOUR copy of this repo, e.g.
+# This is the one file slopstop reads to know what project it is working on.
+# Before the quickstart, change `key` from iansmith/slopstop-example to YOUR
+# copy of this repo, e.g.
 #   key = "your-github-username/slopstop-example"
 # Everything else can stay as-is.
 
-system = "github"
-key    = "iansmith/slopstop-example"
-prefix = "WORD"
+# --- What this project is ------------------------------------------------
+# These are TOP-LEVEL keys: they must appear BEFORE any [table] header below.
+# (In TOML, a bare `key = value` after a [table] belongs to that table.)
+system = "github"                      # ticket backend: github | linear | jira
+key    = "iansmith/slopstop-example"   # <- CHANGE THIS to your fork
+prefix = "WORD"                        # tickets are WORD-1, WORD-2, ...
 
-# 3-state workflow: Todo -> In Progress -> Done.
-# slopstop marks work in-progress by adding this label to the issue.
+# --- Where slopstop keeps its working notes ------------------------------
+# Per-ticket tracking (task_plan.md, findings.md, progress.md) lives HERE,
+# inside the project, under .slopstop/ — not under ~/.claude. Project-local is
+# the modern default: the notes travel with the repo, and it is the only layout
+# that works when /slopstop:run launches headless fleet agents (they cannot
+# write under ~/.claude). Both paths are gitignored (see .gitignore).
+# These are top-level keys too — kept above [status_labels] on purpose.
+#
+# See HOW-IT-WORKS.md, "The three directories", for what goes where and why.
+tracking_dir = ".slopstop/ticket-active"    # tickets in flight
+archive_dir  = ".slopstop/ticket-archive"   # finished tickets (moved here at :merge)
+
+# --- How GitHub encodes "in progress" ------------------------------------
+# GitHub Issues have no status field, so slopstop marks work-in-progress by
+# adding this label to the issue. 3-state workflow: Todo -> In Progress -> Done.
 [status_labels]
 in_progress = "status:in-progress"
 
-# Use Claude's own code review on each PR (no CodeRabbit account needed).
+# --- Code review on each PR ----------------------------------------------
+# Use Claude's own code review (no CodeRabbit account needed).
 [pr_review]
 backend = "claude"
-effort  = "medium"
+effort  = "medium"                     # low | medium | high | max | ultra
