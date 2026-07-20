@@ -46,6 +46,13 @@ Everything else in the file tunes behavior (which review backend, where tracking
 notes go, how GitHub encodes "in progress"). It is committed, so the whole team
 shares one answer. When a command says "read the config," this is the file.
 
+One knob worth calling out: `[pr_review] backend` picks what `:pr` runs after
+opening the PR — `"claude"` (this project's choice — Claude's own `/code-review`),
+`"coderabbit"` (the plugin's default when the block is omitted), or `"greptile"`.
+All three post their findings as comments directly on the PR; see
+[`CONFIG.md`](https://github.com/iansmith/slopstop/blob/master/CONFIG.md) for
+the full option list.
+
 ### 2. The ticket — the unit of work
 
 On GitHub the **issue number is the ticket's identity**. Issue #1 is `WORD-1`;
@@ -135,7 +142,7 @@ The commands are thin. Here is the machine underneath each:
 | `/slopstop:start WORD-1` | Adds the `status:in-progress` label to issue #1; creates branch `fix/WORD-1` off the default branch; creates `.slopstop/ticket-active/WORD-1/` with the three files. |
 | `/slopstop:plan` | Writes the red test, **commits it frozen** (primitive #5), writes `task_plan.md` (plan + Definition of Done) and `findings.md` — then **stops**. It does not write the fix. |
 | *(implement)* | You (or Claude, guided by the plan) write the fix until the red test goes green. Leave it **uncommitted** — `:pr`'s first step runs against the working tree. |
-| `/slopstop:pr` | Simplifies the change; runs the tests; checks the frozen tests were not tampered with; commits; pushes; opens the PR; runs a Claude code review. |
+| `/slopstop:pr` | Simplifies the change; runs the tests; checks the frozen tests were not tampered with; commits; pushes; opens the PR; runs the configured review backend (this project: Claude's `/code-review`); posts a comment back on the ticket linking to the PR and the review outcome. |
 | `/slopstop:merge` | Merges the PR; advances the ticket one state (3-state: closes #1, removes the label); archives the tracking dir to `.slopstop/ticket-archive/`. |
 
 Two things surprise people, and both are deliberate:
